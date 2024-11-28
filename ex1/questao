@@ -1,0 +1,84 @@
+Cenário:
+Você foi contratado por uma pequena empresa para criar uma aplicação simples de gerenciamento de tarefas. A aplicação deve permitir aos usuários adicionar, listar, editar e excluir tarefas. Além disso, as tarefas precisam ser armazenadas em um banco de dados para persistência dos dados.
+
+Tarefa:
+Desenvolva uma aplicação web ou desktop com as seguintes funcionalidades:
+
+Cadastro de Tarefas:
+
+Permitir ao usuário inserir uma tarefa com as seguintes informações:
+Título (obrigatório)
+Descrição (opcional)
+Data de vencimento (obrigatória)
+Listagem de Tarefas:
+
+Exibir todas as tarefas cadastradas em uma tabela ou lista.
+Destacar as tarefas vencidas em vermelho.
+Edição de Tarefas:
+
+Permitir que o usuário edite qualquer informação de uma tarefa já cadastrada.
+Exclusão de Tarefas:
+
+Permitir que o usuário exclua uma tarefa.
+Persistência de Dados:
+
+Use um banco de dados relacional, como SQLite ou MySQL, para armazenar as informações.
+Critérios de Avaliação:
+Funcionalidade (50%):
+
+O sistema implementa todas as funcionalidades requisitadas corretamente.
+Qualidade do Código (20%):
+
+Organização e legibilidade do código (uso de padrões de design, nomenclatura clara, etc.).
+Interface (10%):
+
+Simplicidade e usabilidade da interface.
+Validações e Tratamento de Erros (10%):
+
+O sistema valida entradas e lida corretamente com erros (exemplo: campos obrigatórios, conexões ao banco de dados, etc.).
+Documentação (10%):
+
+O código contém comentários explicativos e um arquivo README descrevendo como instalar e executar o sistema.
+Ferramentas Permitidas:
+Linguagens: Python, Java, C#, ou JavaScript (Node.js com frameworks como Express ou similares).
+Frontend (opcional): React, Angular, ou outra biblioteca/framework de sua escolha.
+Banco de Dados: MySQL, SQLite, ou PostgreSQL.
+Entrega:
+Submeta o projeto em um repositório GitHub contendo:
+O código-fonte.
+Um banco de dados de exemplo (dump ou arquivo de inicialização).
+Instruções para executar o sistema.
+
+
+npm init -y
+npm install express pg body-parser cors
+
+
+2. Configuração do Banco de Dados
+Certifique-se de que o PostgreSQL está instalado e em execução.
+Crie um banco de dados chamado gerenciador_tarefas:
+
+
+CREATE DATABASE gerenciador_tarefas;
+
+
+Dentro desse banco, crie a tabela tasks:
+
+
+CREATE TABLE tasks (
+    id SERIAL PRIMARY KEY,
+    title TEXT NOT NULL,
+    description TEXT,
+    due_date DATE NOT NULL,
+    completed BOOLEAN DEFAULT FALSE
+);
+
+
+6. Rodando o Projeto
+Inicie o PostgreSQL e crie o banco de dados e tabela.
+Configure database.js com as credenciais corretas.
+Inicie o servidor:
+bash
+ 
+node server.js
+Abra no navegador: http://localhost:3000.
