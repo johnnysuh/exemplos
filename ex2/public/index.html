@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciador de Contatos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Gerenciador de Contatos</h1>
+    <form id="contact-form">
+        <input type="text" id="name" placeholder="Nome" required>
+        <input type="email" id="email" placeholder="E-mail" required>
+        <input type="text" id="phone" placeholder="Telefone">
+        <input type="date" id="birth_date" required>
+        <button type="submit">Adicionar Contato</button>
+    </form>
+    <ul id="contact-list"></ul>
+
+    <script>
+        const contactForm = document.getElementById('contact-form');
+        const contactList = document.getElementById('contact-list');
+
+        async function fetchContacts() {
+            const response = await fetch('/contacts');
+            const contacts = await response.json();
+            contactList.innerHTML = '';
+            contacts.forEach(contact => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <span>
+                        <strong>${contact.name}</strong> - ${contact.email}<br>
+                        ${contact.phone || 'Telefone não informado'}<br>
+                        Data de Nascimento: ${contact.birth_date}
+                    </span>
+                    <button onclick="deleteContact(${contact.id})">Excluir</button>
+                `;
+                contactList.appendChild(li);
+            });
+        }
+
+        async function addContact(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const birth_date = document.getElementById('birth_date').value;
+
+            await fetch('/contacts', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, email, phone, birth_date }),
+            });
+
+            contactForm.reset();
+            fetchContacts();
+        }
+
+        async function deleteContact(id) {
+            await fetch(`/contacts/${id}`, { method: 'DELETE' });
+            fetchContacts();
+        }
+
+        contactForm.addEventListener('submit', addContact);
+        fetchContacts();
+    </script>
+</body>
+</html>

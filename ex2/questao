@@ -1,0 +1,32 @@
+Gerenciador de Contatos
+Requisitos
+Você deve criar um sistema para gerenciar contatos. Cada contato deve ter as seguintes informações:
+
+Nome
+E-mail
+Número de telefone
+Data de nascimento
+A aplicação deve ter as funcionalidades de:
+
+Cadastrar um contato (POST)
+Listar todos os contatos (GET)
+Atualizar um contato (PUT)
+Excluir um contato (DELETE)
+A aplicação deve ser feita com Node.js, usando Express no backend e PostgreSQL como banco de dados.
+
+
+1. Banco de Dados (PostgreSQL)
+Criação do Banco de Dados:
+
+CREATE DATABASE gerenciador_contatos;
+
+
+Tabela de Contatos:
+
+CREATE TABLE contacts (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    phone VARCHAR(20),
+    birth_date DATE
+);
